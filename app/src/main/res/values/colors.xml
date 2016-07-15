@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#d32f2f</color>
+    <color name="colorAccent">#f44336</color>
+
+
+    <!--微博正文-->
+    <color name="weiboTagAT">#2196F3</color>
+</resources>

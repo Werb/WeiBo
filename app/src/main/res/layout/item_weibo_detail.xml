@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_user_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:civ_border_color="#fff"
+            app:civ_border_width="1dp" />
+
+        <LinearLayout
+            android:id="@+id/weibo_layout"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="AcFun"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_user_create_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_user_name"
+                    android:layout_marginTop="5dp"
+                    android:text="AcFun"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_weibo_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_user_name"
+                    android:layout_toRightOf="@+id/tv_user_create_at"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="AcFun"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/ic_favorite_grey_600_18dp"/>
+
+            <TextView
+                android:id="@+id/tv_weibo_attitudes_count"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="19"/>
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/ic_transform_grey_600_18dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_weibo_reposts_count"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="19"/>
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/ic_insert_comment_grey_600_18dp"/>
+
+            <TextView
+                android:id="@+id/tv_weibo_comments_count"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="19"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/item_weibo_text_img" />
+
+</LinearLayout>

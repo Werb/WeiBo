@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">WeiBo</string>
+
+    <!--登陆界面XML-->
+    <string name="please_login">请点击登录</string>
+
+    <!--获取Token-->
+    <string name="weibo_auth_success">授权成功</string>
+    <string name="weibo_auth_failed">授权失败</string>
+    <string name="weibo_auth_canceled">取消授权</string>
+    <string name="weibo_token_to_string_format_1">Token：%1$s \\n有效期：%2$s</string>
+    <string name="weibo_token_has_existed">Token 仍在有效期内，无需再次登录。</string>
+
+
+
+
+
+
+
+    <!--RadioBtn xml-->
+    <string name="radio_home">主页</string>
+    <string name="radio_message">消息</string>
+    <string name="radio_search">探索</string>
+    <string name="radio_user">个人</string>
+</resources>

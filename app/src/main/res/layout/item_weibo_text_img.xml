@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout_weibo_text_imag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_weibo_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:textSize="10sp"
+            android:text="123456sdsasxsaxxasxsaxsawawaswdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"/>
+
+        <com.werb.weibo.widget.ninegridlayout.NineGridlayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/iv_ngrid_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.werb.weibo.widget.ninegridlayout.OneImage
+            android:layout_marginTop="8dp"
+            android:id="@+id/iv_oneimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <include layout="@layout/home_iten_weibo_zhuanfa" />
+
+</LinearLayout>

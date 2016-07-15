@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivIndicite"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#729b9b9b" />
+
+    <RadioGroup
+        android:id="@+id/rg_home"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/BottomTabStyle"
+            android:drawableTop="@drawable/radiobtn_home_bg"
+            android:text="@string/radio_home"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_message"
+            style="@style/BottomTabStyle"
+            android:drawableTop="@drawable/radiobtn_home_bg"
+            android:text="@string/radio_message"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_search"
+            style="@style/BottomTabStyle"
+            android:drawableTop="@drawable/radiobtn_home_bg"
+            android:text="@string/radio_search"/>
+
+        <RadioButton
+            android:id="@+id/rb_user"
+            style="@style/BottomTabStyle"
+            android:drawableTop="@drawable/radiobtn_home_bg"
+            android:text="@string/radio_user"/>
+    </RadioGroup>
+
+</LinearLayout>
