@@ -164,8 +164,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     if(status.retweeted_status.user!=null&&!status.retweeted_status.user.equals("")){
                         StringUtil.setWeiBoText(context,"@"+status.retweeted_status.user.screen_name,itemViewHolder.tv_zhuanfa_user_name);
                     }
-                    itemViewHolder.tv_weibo_zhuanfa_comments_count.setText("转发 " + String.valueOf(status.retweeted_status.comments_count));
-                    itemViewHolder.tv_weibo_zhuanfa_reposts_count.setText("评论 " + String.valueOf(status.retweeted_status.reposts_count));
+                    itemViewHolder.tv_weibo_zhuanfa_comments_count.setText("评论 " + String.valueOf(status.retweeted_status.comments_count));
+                    itemViewHolder.tv_weibo_zhuanfa_reposts_count.setText("转发 " + String.valueOf(status.retweeted_status.reposts_count));
 
                     //转发信息正文
                     StringUtil.setWeiBoText(context, status.retweeted_status.text, itemViewHolder.tv_weibo_zhuanfa_text);

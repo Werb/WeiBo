@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.CommentsAPI;
 import com.sina.weibo.sdk.openapi.legacy.StatusesAPI;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
 import com.sina.weibo.sdk.openapi.models.Status;
@@ -39,6 +42,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -51,11 +55,17 @@ public class WeiBoDetailActivity extends ToolbarActivity {
     public static final String WEIBO_STATUS = "weibo_status";
     private static final String TAG = WeiBoDetailActivity.class.getName();
 
+    @Bind(R.id.et_comment)
+    EditText et_comment;
+    @Bind(R.id.cb_is_repost)
+    CheckBox cb_is_repost;
+
 
     /** 当前 Token 信息 */
     private Oauth2AccessToken mAccessToken;
     /** 用于获取微博信息流等操作的API */
     private StatusesAPI mStatusesAPI;
+    private CommentsAPI mCommentsAPI;
     public Status mStatus;
     public String weibo_id;
     private List<BaseFragment> fragmentList;
@@ -101,6 +111,7 @@ public class WeiBoDetailActivity extends ToolbarActivity {
         initTabView();
         mAccessToken = AccessTokenKeeper.readAccessToken(this);
         mStatusesAPI = new StatusesAPI(this, Constants.APP_KEY,mAccessToken);
+        mCommentsAPI = new CommentsAPI(this,Constants.APP_KEY,mAccessToken);
         mStatusesAPI.show(Long.valueOf(weibo_id),mListener);
     }
 
@@ -133,7 +144,7 @@ public class WeiBoDetailActivity extends ToolbarActivity {
         mViewPager.setAdapter(new ViewPagerFgAdapter(getSupportFragmentManager(),fragmentList));//给ViewPager设置适配器
         tabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.instance(this).getScreenHeight()/2);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.instance(this).getScreenHeight());
         mViewPager.setLayoutParams(params);
     }
 
@@ -210,6 +221,20 @@ public class WeiBoDetailActivity extends ToolbarActivity {
     }
 
 
+    //发评论
+    @OnClick(R.id.iv_send_comment) void sendComment(){
+        String comment = et_comment.getText().toString();
+        boolean checked = cb_is_repost.isChecked();
+        if(comment!=null&&!comment.equals("")){
+            if(checked){
+                mStatusesAPI.repost(Long.valueOf(weibo_id),comment,0,mListener);
+                mCommentsAPI.create(comment,Long.valueOf(weibo_id),checked,mListener);
+            }else {
+                mCommentsAPI.create(comment,Long.valueOf(weibo_id),checked,mListener);
+            }
+
+        }
+    }
 
     /**
      * 微博 OpenAPI 回调接口。
@@ -219,12 +244,16 @@ public class WeiBoDetailActivity extends ToolbarActivity {
         public void onComplete(String response) {
             if (!TextUtils.isEmpty(response)) {
                 LogUtil.i(TAG, response);
-                //将JSON串解析成User对象
-                Status status = Status.parse(response);
-                System.out.println("---WeiboDetail---"+status.toString());
+                if (response.startsWith("{\"statuses\"")) {
+                    //将JSON串解析成User对象
+                    Status status = Status.parse(response);
+                    System.out.println("---WeiboDetail---" + status.toString());
 
-                //初始化
-                initViewWithData(status);
+                    //初始化
+                    initViewWithData(status);
+                }else {
+                    Toast.makeText(WeiBoDetailActivity.this,"操作成功！",Toast.LENGTH_SHORT).show();
+                }
             }
         }
 

@@ -68,6 +68,6 @@ public class ClickCircleImageView extends CircleImageView implements View.OnClic
     public void onClick(View v) {
         PrefUtils.setString(getContext(),"OtherUserInfo",user.toString());
         System.out.println("idddd"+uId);
-        getContext().startActivity(UserDetailActivity.newIntent(getContext(),uId));
+        getContext().startActivity(UserDetailActivity.newIntent(getContext(),uId,null));
     }
 }

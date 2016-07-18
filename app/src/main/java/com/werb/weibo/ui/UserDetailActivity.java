@@ -18,8 +18,10 @@ import butterknife.ButterKnife;
 public class UserDetailActivity extends FragmentActivity {
 
     private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
 
     private String user_id;
+    private String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +30,14 @@ public class UserDetailActivity extends FragmentActivity {
         ButterKnife.bind(this);
         parseIntent();
 
-        System.out.println("user--id"+user_id);
-
-        UserFragment userFragment = UserFragment.newInstance(user_id,false);
-
+        UserFragment userFragment = UserFragment.newInstance(user_id,user_name,false);
         getSupportFragmentManager().beginTransaction().add(R.id.user_fg,userFragment).commit();
     }
 
-    public static Intent newIntent(Context context, String id) {
+    public static Intent newIntent(Context context, String id,String name) {
         Intent intent = new Intent(context, UserDetailActivity.class);
         intent.putExtra(UserDetailActivity.USER_ID, id);
+        intent.putExtra(UserDetailActivity.USER_NAME, name);
         return intent;
     }
 
@@ -46,5 +46,6 @@ public class UserDetailActivity extends FragmentActivity {
      */
     private void parseIntent() {
         user_id = getIntent().getStringExtra(USER_ID);
+        user_name = getIntent().getStringExtra(USER_NAME);
     }
 }

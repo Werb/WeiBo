@@ -1,5 +1,6 @@
 package com.werb.weibo.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.werb.weibo.R;
 import com.werb.weibo.info.Constants;
+import com.werb.weibo.ui.SendWeiboActivity;
 import com.werb.weibo.ui.adapter.RecyclerListAdapter;
 import com.werb.weibo.util.AccessTokenKeeper;
 import com.werb.weibo.util.PrefUtils;
@@ -35,6 +37,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Werb on 2016/7/11.
@@ -58,6 +61,11 @@ public class HomeFragment extends BaseFragment {
     RecyclerView recycler_list;
     @Bind(R.id.title)
     TextView userName;
+
+    //发微博
+    @OnClick(R.id.send_weibo) void sendWeibo(){
+        startActivity(new Intent(getActivity(), SendWeiboActivity.class));
+    }
 
     private List<Status> statusList;
     private RecyclerListAdapter weiboHomeAdapter;

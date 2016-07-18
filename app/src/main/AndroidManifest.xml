@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -49,12 +50,26 @@
         <!--各个用户界面-->
         <activity android:name=".ui.UserDetailActivity"/>
 
+        <!--Weibo Tag搜索界面-->
+        <activity android:name=".ui.TagListActivity"/>
+
+        <!--发微博界面-->
+        <activity android:name=".ui.SendWeiboActivity"/>
+
         <!-- 必须注册在微博授权，分享微博时候用到 -->
         <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" >
         </activity>
+
+        <!--Pick photo-->
+        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
+
+        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

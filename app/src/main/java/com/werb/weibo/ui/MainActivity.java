@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentList.add(new HomeFragment());
         fragmentList.add(new MessageFragment());
         fragmentList.add(new SearchFragment());
-        fragmentList.add(UserFragment.newInstance(id,true));
+        fragmentList.add(UserFragment.newInstance(id,null,true));
 
         vp_pager_fg.setAdapter(new ViewPagerFgAdapter(getSupportFragmentManager(), fragmentList));
 

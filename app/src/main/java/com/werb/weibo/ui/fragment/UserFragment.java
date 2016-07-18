@@ -42,10 +42,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Werb on 2016/7/11.
  * Email：1025004680@qq.com
+ * 用户信息界面
+ * 说明：用于 SinaAPI 的限制，测试应用只能获取当前授权用户的信息，其余信息返回 null，
+ * 所以点击当前授权用户可以正常实现功能，点击其余用户将会报错，不是代码问题，是API限制
  */
 public class UserFragment extends BaseFragment {
 
     private static final String U_ID = "u_id";
+    private static final String U_NAME = "u_name";
     private static final String IS_ADMIN = "is_admin";
 
     /**
@@ -78,6 +82,7 @@ public class UserFragment extends BaseFragment {
     private List<Status> statusList;
     private RecyclerListAdapter weiboUserAdapter;
     private String uId;
+    private String uName;
     private boolean isAdmin;
     private long max_id = 0L;
     private LinearLayoutManager mLayoutManager;
@@ -89,7 +94,10 @@ public class UserFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uId = getArguments().getString(U_ID);
+        uName = getArguments().getString(U_NAME);
         isAdmin = getArguments().getBoolean(IS_ADMIN);
+
+        System.out.println("--id--name--admin--"+uId+"-"+uName+"-"+isAdmin);
     }
 
     @Nullable
@@ -101,10 +109,11 @@ public class UserFragment extends BaseFragment {
         return rootView;
     }
 
-    public static UserFragment newInstance(String uId, boolean isAdmin) {
+    public static UserFragment newInstance(String uId,String uName, boolean isAdmin) {
         //通过Bundle保存数据
         Bundle args = new Bundle();
         args.putString(UserFragment.U_ID, uId);
+        args.putString(UserFragment.U_NAME, uName);
         args.putBoolean(UserFragment.IS_ADMIN, isAdmin);
         UserFragment fragment = new UserFragment();
         //将Bundle设置为fragment的参数
@@ -223,9 +232,15 @@ public class UserFragment extends BaseFragment {
         // 获取用户信息接口
         mUserApi = new UsersAPI(getContext(), Constants.APP_KEY, mAccessToken);
         mStatusesAPI = new StatusesAPI(getContext(), Constants.APP_KEY, mAccessToken);
-        long uid = Long.parseLong(uId);
-        mUserApi.show(uid, mListener);
-        mStatusesAPI.userTimeline(uid, 0L, 0L, 50, 1, false, 0, false, mListener);
+
+        if(uName!=null&&uId==null) {
+            mUserApi.show(uName, mListener);
+            mStatusesAPI.userTimeline(uName, 0L, 0L, 50, 1, false, 0, false, mListener);
+        }else if(uName == null&&uId!=null) {
+            long uid = Long.parseLong(uId);
+            mUserApi.show(uid, mListener);
+            mStatusesAPI.userTimeline(uid, 0L, 0L, 50, 1, false, 0, false, mListener);
+        }
     }
 
     /**
@@ -235,8 +250,12 @@ public class UserFragment extends BaseFragment {
         max_id = Long.valueOf(PrefUtils.getString(getContext(), "max_id", "0"));
         // 获取当前已保存过的 Token
         mAccessToken = AccessTokenKeeper.readAccessToken(getContext());
-        long uid = Long.parseLong(uId);
-        mStatusesAPI.userTimeline(uid, 0L, max_id, 50, 1, false, 0, false, mListenerSlide);
+        if(uName!=null&&uId==null) {
+            mStatusesAPI.userTimeline(uName, 0L, max_id, 50, 1, false, 0, false, mListenerSlide);
+        }else if(uName == null&&uId!=null) {
+            long uid = Long.parseLong(uId);
+            mStatusesAPI.userTimeline(uid, 0L, max_id, 50, 1, false, 0, false, mListenerSlide);
+        }
     }
 
     /**

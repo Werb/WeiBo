@@ -25,12 +25,14 @@ public class SplashActivity extends AppCompatActivity {
         LoginOrMain();
     }
 
-    private void LoginOrMain(){
+    private void LoginOrMain() {
         mAccessToken = AccessTokenKeeper.readAccessToken(this);
-        if(mAccessToken.isSessionValid()){
-            startActivity(new Intent(SplashActivity.this,MainActivity.class));
-        }else {
-            startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+        if (mAccessToken.isSessionValid()) {
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        } else {
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            finish();
         }
     }
 }
